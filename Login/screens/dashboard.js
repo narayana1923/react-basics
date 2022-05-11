@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {useRef} from 'react';
 import {
   SafeAreaView,
@@ -19,7 +20,7 @@ import {Svg} from 'react-native-svg';
 
 import {COLORS, FONTS, SIZES, icons, images} from '../constants';
 
-const DashBoard = () => {
+const DashBoard = ({route}) => {
   // dummy data
   const confirmStatus = 'C';
   const pendingStatus = 'P';
@@ -278,7 +279,9 @@ const DashBoard = () => {
           backgroundColor: COLORS.white,
         }}>
         <View>
-          <Text style={{color: COLORS.primary, ...FONTS.h2}}>My Expenses</Text>
+          <Text style={{color: COLORS.primary, ...FONTS.h2}}>
+            {route.params.user}'s Expenses
+          </Text>
           <Text style={{...FONTS.h3, color: COLORS.darkgray}}>
             Summary (private)
           </Text>

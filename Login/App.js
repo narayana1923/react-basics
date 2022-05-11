@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import Login from './screens/login';
 import DashBoard from './screens/dashboard';

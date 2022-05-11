@@ -16,7 +16,7 @@ const Login = ({navigation}) => {
 
   const checkLogin = () => {
     if (username === 'test' && password === '123') {
-      navigation.navigate('Dashboard');
+      navigation.navigate('Dashboard',{user:username});
     } else {
       Alert.alert('Warning', 'Invalid Credentials', [
         {text: 'OK', onPress: () => console.log('OK Pressed')},
