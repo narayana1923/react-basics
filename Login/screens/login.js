@@ -47,7 +47,7 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/vklogo.png')} />
-      <Text style={styles.welcome}>Please login to continue</Text>
+      <Text style={styles.welcome}>Enter your details</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
