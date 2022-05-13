@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import {AuthenticationDetails, CognitoUser} from 'amazon-cognito-identity-js';
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -9,19 +10,38 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import UserPool from '../components/userPool';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const checkLogin = () => {
-    if (username === 'test' && password === '123') {
-      navigation.navigate('Dashboard',{user:username});
-    } else {
-      Alert.alert('Warning', 'Invalid Credentials', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
-    }
+    const user = new CognitoUser({
+      Username: username,
+      Pool: UserPool,
+    });
+
+    const authDetails = new AuthenticationDetails({
+      Username: username,
+      Password: password,
+    });
+    user.authenticateUser(authDetails, {
+      onSuccess: data => {
+        navigation.navigate('Dashboard', {username: username});
+      },
+      onFailure: err => {
+        Alert.alert('Opps!!', 'Invalid Credentials', [
+          {
+            text: 'Ok',
+          },
+        ]);
+      },
+      newPasswordRequired: data => {
+        console.log('newPasswordRequired ', data);
+        navigation.navigate('Dashboard', {username: username});
+      },
+    });
   };
 
   return (

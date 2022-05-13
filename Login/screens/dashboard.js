@@ -280,7 +280,7 @@ const DashBoard = ({route}) => {
         }}>
         <View>
           <Text style={{color: COLORS.primary, ...FONTS.h2}}>
-            {route.params.user}'s Expenses
+            {route.params.username}'s Expenses
           </Text>
           <Text style={{...FONTS.h3, color: COLORS.darkgray}}>
             Summary (private)
