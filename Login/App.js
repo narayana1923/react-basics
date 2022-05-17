@@ -1,14 +1,26 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useEffect} from 'react';
 import Login from './screens/login';
 import DashBoard from './screens/dashboard';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useSelector, useDispatch} from 'react-redux';
+import {getCustomerData} from './components/store/slices/testSlice';
+import Loading from './screens/loading';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  return (
+  const {isCustomerData, retryCustomerData} = useSelector(state => state.test);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(retryCustomerData, isCustomerData);
+    if (isCustomerData) return;
+    setTimeout(() => {
+      dispatch(getCustomerData());
+    }, 3000);
+  }, [retryCustomerData]);
+  return isCustomerData ? (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -23,6 +35,8 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+  ) : (
+    <Loading />
   );
 };
 
